@@ -33,6 +33,11 @@ import { updateUser } from "@/actions/user";
 const OnboardingForm = ({ industries }) => {
     const router = useRouter();
     const [selectedIndustry, setSelectedIndustry] = useState(null);
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     const {
         loading: updateLoading,
@@ -52,14 +57,7 @@ const OnboardingForm = ({ industries }) => {
 
     const onSubmit = async (values) => {
         try {
-            const formattedIndustry = `${values.industry}-${values.subIndustry
-                .toLowerCase()
-                .replace(/ /g, "-")}`;
-
-            await updateUserFn({
-                ...values,
-                industry: formattedIndustry,
-            });
+            await updateUserFn(values);
         } catch (error) {
             console.error("Onboarding error:", error);
         }

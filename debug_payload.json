@@ -1,0 +1,9 @@
+{
+  "industry": "tech",
+  "subIndustry": "IT Services",
+  "bio": "testing",
+  "experience": 2,
+  "skills": [
+    "python"
+  ]
+}
