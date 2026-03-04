@@ -66,7 +66,7 @@ async function Header() {
                     </DropdownMenu>
                 </SignedIn>
                 <SignedOut>
-                    <SignInButton fallbackRedirectUrl="/dashboard" mode="modal" asChild>
+                    <SignInButton fallbackRedirectUrl="/dashboard" mode="modal">
                         <Button variant="outline">Sign In</Button>
                     </SignInButton>
                 </SignedOut>
