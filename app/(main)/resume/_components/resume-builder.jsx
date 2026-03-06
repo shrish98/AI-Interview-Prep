@@ -24,7 +24,7 @@ import { useUser } from '@clerk/nextjs'
 import { entriesToMarkdown } from '@/app/lib/helper'
 import { resumeSchema } from '@/app/lib/schema'
 
-export default function ResumeBuilder ({ initialContent }) {
+export default function ResumeBuilder({ initialContent }) {
   const [activeTab, setActiveTab] = useState('edit')
   const [previewContent, setPreviewContent] = useState(initialContent)
   const { user } = useUser()
@@ -397,39 +397,40 @@ export default function ResumeBuilder ({ initialContent }) {
               preview={resumeMode}
             />
           </div>
-          <div className='absolute top-0 left-0 -z-50 opacity-0 pointer-events-none'>
-            <div
-              id='resume-pdf'
-              className='w-[210mm] min-h-[297mm] p-10 bg-white text-black'
-              style={{
-                '--background': '#ffffff',
-                '--foreground': '#000000',
-                '--primary': '#000000',
-                '--primary-foreground': '#ffffff',
-                '--secondary': '#f3f4f6',
-                '--secondary-foreground': '#000000',
-                '--muted': '#f3f4f6',
-                '--muted-foreground': '#6b7280',
-                '--accent': '#f3f4f6',
-                '--accent-foreground': '#000000',
-                '--destructive': '#ef4444',
-                '--destructive-foreground': '#ffffff',
-                '--border': '#e5e7eb',
-                '--input': '#e5e7eb',
-                '--ring': '#000000'
-              }}
-            >
-              <MDEditor.Markdown
-                source={previewContent}
-                style={{
-                  background: 'white',
-                  color: 'black'
-                }}
-              />
-            </div>
-          </div>
         </TabsContent>
       </Tabs>
+
+      <div className='absolute top-0 left-0 -z-50 opacity-0 pointer-events-none'>
+        <div
+          id='resume-pdf'
+          className='w-[210mm] min-h-[297mm] p-10 bg-white text-black'
+          style={{
+            '--background': '#ffffff',
+            '--foreground': '#000000',
+            '--primary': '#000000',
+            '--primary-foreground': '#ffffff',
+            '--secondary': '#f3f4f6',
+            '--secondary-foreground': '#000000',
+            '--muted': '#f3f4f6',
+            '--muted-foreground': '#6b7280',
+            '--accent': '#f3f4f6',
+            '--accent-foreground': '#000000',
+            '--destructive': '#ef4444',
+            '--destructive-foreground': '#ffffff',
+            '--border': '#e5e7eb',
+            '--input': '#e5e7eb',
+            '--ring': '#000000'
+          }}
+        >
+          <MDEditor.Markdown
+            source={previewContent}
+            style={{
+              background: 'white',
+              color: 'black'
+            }}
+          />
+        </div>
+      </div>
     </div>
   )
 }
