@@ -112,19 +112,39 @@ export default function ResumeBuilder({ initialContent }) {
     setIsGenerating(true)
     toast.info('Generating PDF...')
     try {
-      const html2pdf = (await import('html2pdf.js')).default
+      const html2canvas = (await import('html2canvas')).default
+      const { jsPDF } = await import('jspdf')
       const element = document.getElementById('resume-pdf')
       if (!element) throw new Error('Resume element not found')
 
-      const opt = {
-        margin: [15, 15],
-        filename: 'resume.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      const canvas = await html2canvas(element, { scale: 2 })
+      const imgData = canvas.toDataURL('image/jpeg', 0.98)
+
+      const pdf = new jsPDF({
+        format: 'a4',
+        orientation: 'portrait',
+      })
+
+      const imgProps = pdf.getImageProperties(imgData)
+      const margin = 15
+      const pdfWidth = pdf.internal.pageSize.getWidth() - 2 * margin
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width
+      const pageHeight = pdf.internal.pageSize.getHeight()
+
+      let heightLeft = pdfHeight
+      let position = 0
+
+      pdf.addImage(imgData, 'JPEG', margin, margin, pdfWidth, pdfHeight)
+      heightLeft -= pageHeight - 2 * margin
+
+      while (heightLeft > 0) {
+        position = heightLeft - pdfHeight
+        pdf.addPage()
+        pdf.addImage(imgData, 'JPEG', margin, position + margin, pdfWidth, pdfHeight)
+        heightLeft -= pageHeight - 2 * margin
       }
 
-      await html2pdf().set(opt).from(element).save()
+      pdf.save('resume.pdf')
       toast.success('Resume downloaded successfully!')
     } catch (error) {
       console.error('PDF generation error:', error)
