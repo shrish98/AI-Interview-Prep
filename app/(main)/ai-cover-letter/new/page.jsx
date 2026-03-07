@@ -1,13 +1,9 @@
-import { getCoverLetter } from "@/actions/cover-letter";
-import CoverLetterPreview from "../components/cover-letter-preview";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import CoverLetterGenerator from "../components/cover-letter-generation";
 
-export default async function CoverLetterPage({ params }) {
-    const { id } = await params;
-    const coverLetter = await getCoverLetter(id);
-
+export default function NewCoverLetterPage() {
     return (
         <div className="container mx-auto py-6">
             <div className="flex flex-col space-y-2">
@@ -19,12 +15,15 @@ export default async function CoverLetterPage({ params }) {
                 </Link>
                 <div className="pb-6">
                     <h1 className="text-6xl font-bold gradient-title tracking-tighter">
-                        {coverLetter?.jobTitle} at {coverLetter?.companyName}
+                        Create Cover Letter
                     </h1>
+                    <p className="text-muted-foreground">
+                        Generate a personalized cover letter for your next job application.
+                    </p>
                 </div>
             </div>
 
-            <CoverLetterPreview content={coverLetter?.content} />
+            <CoverLetterGenerator />
         </div>
     );
 }

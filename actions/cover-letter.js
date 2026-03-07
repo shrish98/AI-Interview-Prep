@@ -5,14 +5,14 @@ import { auth } from "@clerk/nextjs/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 export async function generateCoverLetter(data) {
     const { userId } = await auth();
     if (!userId) throw new Error("Unauthorized");
 
     const user = await db.user.findUnique({
-        where: { clerkUserId: userId },
+        where: { ClerkUserId: userId },
     });
 
     if (!user) throw new Error("User not found");
@@ -43,24 +43,27 @@ export async function generateCoverLetter(data) {
   `;
 
     try {
+        console.log("[CoverLetter] Calling Gemini API...");
         const result = await model.generateContent(prompt);
         const content = result.response.text().trim();
+        console.log("[CoverLetter] Gemini API successful! Extracted content length:", content.length);
 
+        console.log("[CoverLetter] Saving to Prisma Database...");
         const coverLetter = await db.coverLetter.create({
             data: {
                 content,
                 jobDescription: data.jobDescription,
                 companyName: data.companyName,
                 jobTitle: data.jobTitle,
-                status: "completed",
                 userId: user.id,
             },
         });
+        console.log("[CoverLetter] Successfully saved! ID:", coverLetter.id);
 
         return coverLetter;
     } catch (error) {
-        console.error("Error generating cover letter:", error.message);
-        throw new Error("Failed to generate cover letter");
+        console.error("[CoverLetter] FATAL ERROR generating cover letter:", error);
+        throw new Error("Failed to generate cover letter: " + error.message);
     }
 }
 
@@ -69,7 +72,7 @@ export async function getCoverLetters() {
     if (!userId) throw new Error("Unauthorized");
 
     const user = await db.user.findUnique({
-        where: { clerkUserId: userId },
+        where: { ClerkUserId: userId },
     });
 
     if (!user) throw new Error("User not found");
@@ -89,7 +92,7 @@ export async function getCoverLetter(id) {
     if (!userId) throw new Error("Unauthorized");
 
     const user = await db.user.findUnique({
-        where: { clerkUserId: userId },
+        where: { ClerkUserId: userId },
     });
 
     if (!user) throw new Error("User not found");
@@ -107,7 +110,7 @@ export async function deleteCoverLetter(id) {
     if (!userId) throw new Error("Unauthorized");
 
     const user = await db.user.findUnique({
-        where: { clerkUserId: userId },
+        where: { ClerkUserId: userId },
     });
 
     if (!user) throw new Error("User not found");

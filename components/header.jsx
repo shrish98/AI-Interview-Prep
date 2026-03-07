@@ -10,13 +10,12 @@ async function Header() {
     <header className='sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 flex justify-between items-center p-4 border-b'>
       <nav>
         <Link href='/'>
-          <Image
-            src='/logo.png'
+          <img
+            src="/logo.png?v=1"
             alt='PrepWise Logo'
             width={200}
             height={60}
             className='h-12 w-auto object-contain'
-            priority
           />
         </Link>
       </nav>

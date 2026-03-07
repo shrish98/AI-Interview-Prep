@@ -8,8 +8,7 @@ import { howItWorks } from "./data/howItWorks";
 import { testimonial } from "./data/testimonial";
 import Image from "next/image";
 import Link from "next/link";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { faqs } from "./data/faqs";
+import { FaqSection } from "@/components/faq-section";
 
 
 export default function Home() {
@@ -149,18 +148,7 @@ export default function Home() {
                             </p>
                         </div>
                         <div className="max-w-6xl mx-auto w-full">
-                            <Accordion type="single" collapsible className="w-full">
-                                {faqs.map((faq, index) => {
-                                    return (
-                                        <AccordionItem key={index} value={`item-${index}`}>
-                                            <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
-                                            <AccordionContent>
-                                                {faq.answer}
-                                            </AccordionContent>
-                                        </AccordionItem>
-                                    );
-                                })}
-                            </Accordion>
+                            <FaqSection />
                         </div>
                     </div>
 
