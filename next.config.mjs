@@ -8,6 +8,15 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/cover-letter",
+        destination: "/ai-cover-letter",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
