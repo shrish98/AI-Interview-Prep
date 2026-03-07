@@ -1,4 +1,4 @@
-import { serve } from "@/lib/inngest/client";
+import { serve, inngest } from "@/lib/inngest/client";
 
 // Create an API that serves zero functions
 export const { GET, POST, PUT } = serve({
