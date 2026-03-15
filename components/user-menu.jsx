@@ -18,16 +18,16 @@ export function UserMenu() {
             <SignedIn>
                 <Button variant='outline' asChild>
                     <Link href='/dashboard'>
-                        <LayoutDashboard className='w-4 h-4 mr-2' />
-                        <span>Dashboard</span>
+                        <LayoutDashboard className='w-4 h-4 md:mr-2' />
+                        <span className='hidden md:inline'>Dashboard</span>
                     </Link>
                 </Button>
 
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button variant="default" className="flex items-center gap-2 outline-none">
+                        <Button variant="default" className="flex items-center md:gap-2 outline-none">
                             <StarsIcon className='h-4 w-4' />
-                            <span>Growth tools</span>
+                            <span className='hidden md:inline'>Growth tools</span>
                             <ChevronDown className='h-4 w-4' />
                         </Button>
                     </DropdownMenuTrigger>
