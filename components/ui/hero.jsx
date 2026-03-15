@@ -25,10 +25,10 @@ const HeroSection = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
     return (
-        <section className="w-full pt-36 md:pt-48 pb-0">
+        <section className="w-full pt-20 md:pt-48 pb-0">
             <div className="space-y-6 text-center">
                 <div className="space-y-6 mx-auto">
-                    <h1 className="text-5xl font-bold md:text-6xl lg:text-7xl xl:text-8xl gradient-title" >
+                    <h1 className="gradient-title" >
                         Your AI Career Coach for
                         <br />
                         Professional Success
@@ -46,7 +46,7 @@ const HeroSection = () => {
 
                 </div>
                 <div className="hero-image-wrapper mt-5 md:mt-0"> {/* for tilting the image */}
-                    <div ref={imageRef} className="hero-image px-12 md:px-24 relative w-full max-w-7xl mx-auto">
+                    <div ref={imageRef} className="hero-image px-4 md:px-24 relative w-full max-w-7xl mx-auto">
                         <Image src="/banner-trimmed.png" alt="banner preview" width={1280} height={720} className="rounded-lg shadow-2xl border mx-auto w-full h-auto" priority />
                     </div>
                 </div>

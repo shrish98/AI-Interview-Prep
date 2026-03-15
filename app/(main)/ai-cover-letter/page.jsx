@@ -12,7 +12,7 @@ export default async function CoverLetterPage() {
         <div className="container mx-auto py-6 space-y-8">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-6-xl font-bold gradient-title">
+                    <h1 className="font-bold gradient-title">
                         AI Cover Letter
                     </h1>
                     <p className="text-muted-foreground">

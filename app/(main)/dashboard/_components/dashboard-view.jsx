@@ -86,8 +86,8 @@ const DashboardView = ({ insights }) => {
   return (
     <div className='space-y-6 py-8'>
       <div className='flex flex-col md:flex-row justify-between items-start md:items-center gap-4'>
-        <div>
-          <h1 className='text-3xl font-bold tracking-tight'>
+        <div className="w-full">
+          <h1 className='font-bold gradient-title'>
             Industry Insights
           </h1>
           <p className='text-muted-foreground'>
@@ -107,7 +107,7 @@ const DashboardView = ({ insights }) => {
         </div>
       </div>
 
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
             <CardTitle className='text-sm font-medium'>Growth Rate</CardTitle>
