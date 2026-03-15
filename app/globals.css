@@ -151,7 +151,7 @@
 }
 
 @utility gradient-title {
-  @apply gradient bg-clip-text text-transparent font-extrabold tracking-tighter pb-2 pr-2;
+  @apply gradient bg-clip-text text-transparent font-extrabold tracking-tighter pb-2 pr-2 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl;
 }
 
 .hero-image-wrapper {

@@ -19,7 +19,7 @@ export function UserMenu() {
                 <Button variant='outline' asChild>
                     <Link href='/dashboard'>
                         <LayoutDashboard className='w-4 h-4 mr-2' />
-                        <span className='hidden md:block'>Dashboard</span>
+                        <span>Dashboard</span>
                     </Link>
                 </Button>
 
@@ -27,27 +27,27 @@ export function UserMenu() {
                     <DropdownMenuTrigger asChild>
                         <Button variant="default" className="flex items-center gap-2 outline-none">
                             <StarsIcon className='h-4 w-4' />
-                            <span className='hidden md:block'>Growth tools</span>
+                            <span>Growth tools</span>
                             <ChevronDown className='h-4 w-4' />
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                         <DropdownMenuItem asChild>
                             <Link href={'/resume'} className='flex items-center gap-2'>
-                                <FileText className='w-4 h-4 mr-2' />
-                                <span className='hidden md:block'>Build Resume</span>
+                                <FileText className='w-4 h-4' />
+                                <span>Build Resume</span>
                             </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
                             <Link href={'/ai-cover-letter'} className='flex items-center gap-2'>
-                                <PenBox className='w-4 h-4 mr-2' />
-                                Cover Letter
+                                <PenBox className='w-4 h-4' />
+                                <span>Cover Letter</span>
                             </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
                             <Link href={'/interview'} className='flex items-center gap-2'>
-                                <GraduationCap className='w-4 h-4 mr-2' />
-                                Interview Prep
+                                <GraduationCap className='w-4 h-4' />
+                                <span>Interview Prep</span>
                             </Link>
                         </DropdownMenuItem>
                     </DropdownMenuContent>
