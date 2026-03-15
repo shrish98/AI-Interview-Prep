@@ -112,17 +112,22 @@ export default function ResumeBuilder({ initialContent }) {
     setIsGenerating(true)
     toast.info('Generating PDF...')
     try {
-      const html2canvas = (await import('html2canvas')).default
+      const html2canvas = (await import('html2canvas-pro')).default
       const { jsPDF } = await import('jspdf')
       const element = document.getElementById('resume-pdf')
       if (!element) throw new Error('Resume element not found')
 
-      const canvas = await html2canvas(element, { scale: 2 })
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff'
+      })
       const imgData = canvas.toDataURL('image/jpeg', 0.98)
 
       const pdf = new jsPDF({
         format: 'a4',
-        orientation: 'portrait',
+        orientation: 'portrait'
       })
 
       const imgProps = pdf.getImageProperties(imgData)
@@ -140,7 +145,14 @@ export default function ResumeBuilder({ initialContent }) {
       while (heightLeft > 0) {
         position = heightLeft - pdfHeight
         pdf.addPage()
-        pdf.addImage(imgData, 'JPEG', margin, position + margin, pdfWidth, pdfHeight)
+        pdf.addImage(
+          imgData,
+          'JPEG',
+          margin,
+          position + margin,
+          pdfWidth,
+          pdfHeight
+        )
         heightLeft -= pageHeight - 2 * margin
       }
 

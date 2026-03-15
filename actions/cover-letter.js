@@ -3,9 +3,10 @@
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { revalidatePath } from "next/cache";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 export async function generateCoverLetter(data) {
     const { userId } = await auth();
@@ -52,15 +53,16 @@ export async function generateCoverLetter(data) {
                 jobDescription: data.jobDescription,
                 companyName: data.companyName,
                 jobTitle: data.jobTitle,
-                status: "completed",
                 userId: user.id,
             },
         });
 
+        revalidatePath("/ai-cover-letter");
+
         return coverLetter;
     } catch (error) {
-        console.error("Error generating cover letter:", error.message);
-        throw new Error("Failed to generate cover letter");
+        console.error("Error generating cover letter:", error);
+        throw new Error("Failed to generate cover letter: " + error.message);
     }
 }
 
@@ -94,7 +96,7 @@ export async function getCoverLetter(id) {
 
     if (!user) throw new Error("User not found");
 
-    return await db.coverLetter.findUnique({
+    return await db.coverLetter.findFirst({
         where: {
             id,
             userId: user.id,
@@ -112,7 +114,7 @@ export async function deleteCoverLetter(id) {
 
     if (!user) throw new Error("User not found");
 
-    return await db.coverLetter.delete({
+    return await db.coverLetter.deleteMany({
         where: {
             id,
             userId: user.id,

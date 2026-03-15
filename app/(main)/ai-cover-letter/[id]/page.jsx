@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 const CoverLetterPage = async ({ params }) => {
-    const id = await params.id;
+    const { id } = await params;
     const coverLetter = await getCoverLetter(id);
 
     return (
